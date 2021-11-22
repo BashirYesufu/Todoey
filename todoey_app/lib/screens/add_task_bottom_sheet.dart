@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey_app/models/task_data.dart';
 
 class AddTaskBottomSheet extends StatelessWidget {
 
   AddTaskBottomSheet({
     Key? key,
-    required this.addTaskCallBack
   }) : super(key: key);
-
-  final Function(String) addTaskCallBack;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +34,8 @@ class AddTaskBottomSheet extends StatelessWidget {
           SizedBox(height: 30.0,),
           TextButton(
             onPressed: () {
-              addTaskCallBack(newTaskTitle);
+              Provider.of<TaskData>(context, listen: false).addTask(newTaskTitle: newTaskTitle);
+              Navigator.pop(context);
             },
             child: Text(
               'Add',
